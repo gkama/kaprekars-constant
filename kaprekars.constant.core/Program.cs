@@ -1,18 +1,22 @@
+using kaprekars.constant.services;
+
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
-// Add services to the container.
+services.AddSingleton<IRepository, Repository>()
+    .AddHealthChecks();
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
+services.AddControllers();
+services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
 
 }
 
-app.UseAuthorization();
+app.MapHealthChecks("/health");
 app.MapControllers();
-app.Run();
+
+await app.RunAsync();
