@@ -1,5 +1,6 @@
 ﻿namespace kaprekars.constant.services;
-public class Class1
+
+public class Repository : IRepository
 {
 
 }
