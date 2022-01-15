@@ -8,7 +8,17 @@ namespace kaprekars.constant.data
 {
     public static class Extensions
     {
-        private static int ToDescendingOrder(
+        public static int ToAscendingOrder(this int number)
+        {
+            return number.ToOrder();
+        }
+
+        public static int ToDescendingOrder(this int number)
+        {
+            return number.ToOrder(descending: true);
+        }
+
+        private static int ToOrder(
             this int number,
             bool descending = false)
         {

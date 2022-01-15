@@ -21,4 +21,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\kaprekars.constant.data\kaprekars.constant.data.csproj" />
+    <ProjectReference Include="..\kaprekars.constant.services\kaprekars.constant.services.csproj" />
+  </ItemGroup>
+
 </Project>
