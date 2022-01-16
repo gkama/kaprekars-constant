@@ -11,7 +11,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
@@ -26,10 +26,7 @@ jobs:
       run: dotnet restore ${{ env.project_file }}
       
     - name: build
-      run: dotnet build -c ${{ env.configuration }} ${{env.project_file }} --no-restore
-
-    - name: test
-      run: dotnet test -c ${{ env.configuration }} ${{ env.project_test_file }} -l trx -v normal --no-build
+      run: dotnet build -c ${{ env.configuration }} ${{env.project_file }} --no-restore 
 
     - name: publish
       run: dotnet publish -c ${{ env.configuration }} -o ${{ env.output_path }}
@@ -41,3 +38,17 @@ jobs:
         file: ./Dockerfile
         push: false
         tags: gkama/kaprekars-constant:latest
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    
+    - name: test
+      run: dotnet test -c ${{ env.configuration }} ${{ env.project_test_file }} -l trx -v normal --no-build
