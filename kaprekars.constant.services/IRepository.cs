@@ -4,5 +4,5 @@ namespace kaprekars.constant.services;
 public interface IRepository
 {
     IEnumerable<Routine> GetRoutines(Request request);
-    Routine GetRoutine(int number);
+    Routine GetRoutine(string number);
 }

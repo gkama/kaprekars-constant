@@ -26,7 +26,7 @@ public class Repository : IRepository
             var iterations = 0;
             var routines = new List<Routine>();
             var num = int.Parse(request.Number);
-            var routine = GetRoutine(num);
+            var routine = GetRoutine(num.ToString());
 
             routines.Add(routine);
 
@@ -35,7 +35,7 @@ public class Repository : IRepository
 
             while (routine.Result != Constants.KaprekarsConstant)
             {
-                routine = GetRoutine(routine.Result);
+                routine = GetRoutine(routine.Result.ToString());
                 routines.Add(routine);
                 iterations++;
 
@@ -66,11 +66,11 @@ public class Repository : IRepository
         }
     }
 
-    public Routine GetRoutine(int number)
+    public Routine GetRoutine(string number)
     {
         var num = number;
-        var asc = Math.Abs(num.ToAscendingOrder());
-        var desc = Math.Abs(num.ToDescendingOrder());
+        var asc = int.Parse(num.ToAscendingOrder());
+        var desc = int.Parse(num.ToDescendingOrder());
         var res = desc > asc
             ? desc - asc
             : asc - desc;
@@ -80,7 +80,7 @@ public class Repository : IRepository
 
         return new Routine
         {
-            Number = num,
+            Number = int.Parse(num),
             Ascending = asc,
             Descending = desc,
             Result = res,

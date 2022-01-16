@@ -6,7 +6,7 @@
         {
             return number.ToOrder();
         }
-        public static int ToAscendingOrder(this string number)
+        public static string ToAscendingOrder(this string number)
         {
             return number.ToOrder();
         }
@@ -15,7 +15,7 @@
         {
             return number.ToOrder(descending: true);
         }
-        public static int ToDescendingOrder(this string number)
+        public static string ToDescendingOrder(this string number)
         {
             return number.ToOrder(descending: true);
         }
@@ -35,7 +35,7 @@
             return int.Parse(orderedNumberStr);
         }
 
-        private static int ToOrder(
+        private static string ToOrder(
             this string number,
             bool descending = false)
         {
@@ -47,7 +47,7 @@
                 : numberCharArray.OrderByDescending(x => x);
             var orderedNumberStr = new string(orderedNumber.ToArray());
 
-            return int.Parse(orderedNumberStr);
+            return orderedNumberStr;
         }
 
         public static bool HasAtleastTwoUniqueDigits(this int number)
