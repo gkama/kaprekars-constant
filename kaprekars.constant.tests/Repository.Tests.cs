@@ -1,5 +1,6 @@
 ﻿using System;
 using Xunit;
+using Xunit.Gherkin.Quick;
 using NSubstitute;
 using FluentAssertions;
 using FluentValidation;
@@ -112,6 +113,52 @@ namespace kaprekars.constant.tests
             routine.Subtraction.Should().Contain(asc.ToString());
             routine.Subtraction.Should().Contain(desc.ToString());
             routine.Subtraction.Should().Contain(routine.Result.ToString());
+        }
+    }
+
+    [FeatureFile("./Features/RepositoryGetRoutine.feature")]
+    public sealed class RepositoryGetRoutine : Feature
+    {
+        private readonly IRepository _repo;
+        private int _num;
+        private Routine _routine;
+
+        public RepositoryGetRoutine()
+        {
+            _repo = new Repository(
+                Substitute.For<ILogger<Repository>>(),
+                new RequestValidator());
+             _routine = new Routine();
+        }
+
+        [Given(@"I chose a four-digit number with two unique digits (\d+)")]
+        public void SetNum(int num)
+        {
+            _num = num;
+        }
+
+        [When(@"I get a routine")]
+        public void IGetARoutine()
+        {
+            _routine = _repo.GetRoutine(_num);
+        }
+
+        [Then(@"the ascending number should be (\d+)")]
+        public void TheAscendingNumberShouldBe(int asc)
+        {
+            _routine.Ascending.Should().Be(asc);
+        }
+
+        [And(@"the descending number should be (\d+)")]
+        public void TheDescendingNumberShouldBe(int desc)
+        {
+            _routine.Descending.Should().Be(desc);
+        }
+
+        [And(@"the result number should be (\d+)")]
+        public void TheResultNumberShouldBe(int res)
+        {
+            _routine.Result.Should().Be(res);
         }
     }
 }
