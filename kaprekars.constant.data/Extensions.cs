@@ -6,14 +6,37 @@
         {
             return number.ToOrder();
         }
+        public static int ToAscendingOrder(this string number)
+        {
+            return number.ToOrder();
+        }
 
         public static int ToDescendingOrder(this int number)
+        {
+            return number.ToOrder(descending: true);
+        }
+        public static int ToDescendingOrder(this string number)
         {
             return number.ToOrder(descending: true);
         }
 
         private static int ToOrder(
             this int number,
+            bool descending = false)
+        {
+            var numberCharArray = number.ToString()
+                .ToCharArray();
+
+            var orderedNumber = descending == false
+                ? numberCharArray.OrderBy(x => x)
+                : numberCharArray.OrderByDescending(x => x);
+            var orderedNumberStr = new string(orderedNumber.ToArray());
+
+            return int.Parse(orderedNumberStr);
+        }
+
+        private static int ToOrder(
+            this string number,
             bool descending = false)
         {
             var numberCharArray = number.ToString()
