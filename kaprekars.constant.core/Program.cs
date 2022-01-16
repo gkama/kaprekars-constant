@@ -1,9 +1,13 @@
+using FluentValidation;
+
+using kaprekars.constant.data;
 using kaprekars.constant.services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.AddSingleton<IRepository, Repository>()
+    .AddSingleton<IValidator<Request>, RequestValidator>()
     .AddHealthChecks();
 
 services.AddControllers();

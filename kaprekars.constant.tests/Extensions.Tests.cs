@@ -37,4 +37,20 @@ public class ExtensionsTests
         // Assert
         result.Should().Be(resultNumber);
     }
+
+    [Theory]
+    [InlineData(1234, true)]
+    [InlineData(8532, true)]
+    [InlineData(0082, true)]
+    [InlineData(0001, false)]
+    [InlineData(1112, false)]
+    [InlineData(1222, false)]
+    public void HasAtleastTwoUniqueDigits(int number, bool expectedResult)
+    {
+        // Act
+        var result = number.HasAtleastTwoUniqueDigits();
+
+        // Assert
+        result.Should().Be(result);
+    }
 }

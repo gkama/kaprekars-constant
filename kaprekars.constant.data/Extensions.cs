@@ -26,5 +26,13 @@
 
             return int.Parse(orderedNumberStr);
         }
+
+        public static bool HasAtleastTwoUniqueDigits(this int number)
+        {
+            return number.ToString()
+                .ToCharArray()
+                .Distinct()
+                .Count() >= 2;
+        }
     }
 }
