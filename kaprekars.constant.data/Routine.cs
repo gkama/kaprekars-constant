@@ -15,6 +15,8 @@ namespace kaprekars.constant.data
         {
             Number = number;
 
+            //TODO add validations
+
             // Calculations
             Ascending = Number.ToAscendingOrder();
             Descending = Number.ToDescendingOrder();
