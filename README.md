@@ -25,3 +25,49 @@ The above process, known as Kaprekar's routine, will always reach its fixed poin
 The only four-digit numbers for which Kaprekar's routine does not reach **6174** are repdigits such as 1111, which give the result 0000 after a single iteration. All other four-digit numbers eventually reach **6174** if leading zeros are used to keep the number of digits at 4.
 
 [**6174** (number)](https://en.wikipedia.org/wiki/6174_(number))
+
+## How to build and run it
+
+### Dotnet
+
+```pw
+dotnet run -project .\kaprekars.constant.core\
+```
+
+### Docker
+
+(Optional) Build the project
+
+```pw
+dotnet build -c Release
+```
+
+First we need to run `dotnet publish`
+
+```pw
+dotnet publish -c Release -o app/publish/kaprekars.constant.core
+```
+
+Then we build the `Dockerfile`
+
+```pw
+docker build -t gkama/kaprekars-constant:dev -f Dockerfile .
+```
+
+(Optional) Run the image
+
+```pw
+docker run -it --rm -p 8000:80 gkama/kaprekars-constant:dev
+```
+
+(Optional) Push to Docker hub
+
+```pw
+docker push gkama/kaprekars-constant:dev
+```
+
+(Optional) Clean up `none` images
+
+```pw
+docker rmi $(docker images -f “dangling=true” -q)
+```
