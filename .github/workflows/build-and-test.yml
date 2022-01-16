@@ -52,3 +52,32 @@ jobs:
     
     - name: test
       run: dotnet test -c ${{ env.configuration }} ${{ env.project_test_file }} -l trx -v normal --no-build
+
+    - name: cache sonarcloud packages
+      uses: actions/cache@v1
+      with:
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+
+    - name: cache sonarcloud scanner
+      id: cache-sonar-scanner
+      uses: actions/cache@v1
+      with:
+        path: .\.sonar\scanner
+        key: ${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ runner.os }}-sonar-scanner
+
+    - name: install sonarcloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      run: |
+        mkdir .\.sonar\scanner
+        dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+
+    - name: build and analyze
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        .\.sonar\scanner\dotnet-sonarscanner begin /k:"gkama_kaprekars-constant" /o:"gkama" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        dotnet build -c ${{ env.configuration }}
+        .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
