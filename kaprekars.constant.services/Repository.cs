@@ -25,9 +25,6 @@ public class Repository : IRepository
 
             var iterations = 0;
             var routines = new List<Routine>();
-
-            // Parse Request.Number as integer
-            // Initial routine
             var num = int.Parse(request.Number);
             var routine = GetRoutine(num);
 

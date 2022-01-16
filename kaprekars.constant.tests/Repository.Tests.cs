@@ -20,6 +20,26 @@ namespace kaprekars.constant.tests
                 new RequestValidator());
         }
 
+        [Fact]
+        public void Repository_WhenILoggerNull_ShouldThrowArgumentNullException()
+        {
+            // Act
+            var builder = () => _ = new Repository(null, Substitute.For<IValidator<Request>>());
+
+            // Assert
+            builder.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Repository_WhenIValidatorNull_ShouldThrowArgumentNullException()
+        {
+            // Act
+            var builder = () => _ = new Repository(Substitute.For<ILogger<Repository>>(), null);
+
+            // Assert
+            builder.Should().Throw<ArgumentNullException>();
+        }
+
         [Theory]
         [InlineData("1234")]
         [InlineData("8597")]
