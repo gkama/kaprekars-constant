@@ -13,7 +13,7 @@ public class ExtensionsTests
     [InlineData(8082, 0288)]
     [InlineData(8532, 2358)]
     [InlineData(0082, 0028)]
-    public void ToAscendingOrder(int inputNumber, int resultNumber)
+    public void ToAscendingOrder_IsSuccessful(int inputNumber, int resultNumber)
     {
         // Act
         var result = inputNumber.ToAscendingOrder();
@@ -29,7 +29,7 @@ public class ExtensionsTests
     [InlineData(8082, 8820)]
     [InlineData(8532, 8532)]
     [InlineData(0082, 0082)]
-    public void ToDescendingOrder(int inputNumber, int resultNumber)
+    public void ToDescendingOrder_IsSuccessful(int inputNumber, int resultNumber)
     {
         // Act
         var result = inputNumber.ToDescendingOrder();
