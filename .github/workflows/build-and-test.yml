@@ -78,6 +78,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
+        cd .\.sonar\scanner
         dotnet-sonarscanner begin /k:"gkama_kaprekars-constant" /o:"gkama" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
         dotnet build -c ${{ env.configuration }}
         dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
