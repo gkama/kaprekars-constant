@@ -1,27 +1,11 @@
-﻿
-
-namespace kaprekars.constant.data
+﻿namespace kaprekars.constant.data
 {
     public class Routine
     {
         public int Number { get; set; }
-
-        public readonly int Ascending;
-        public readonly int Descending;
-        public readonly int Result;
-        public readonly string? Subtraction;
-
-        public Routine(int number)
-        {
-            Number = number;
-
-            //TODO add validations
-
-            // Calculations
-            Ascending = Number.ToAscendingOrder();
-            Descending = Number.ToDescendingOrder();
-            Result = Ascending - Descending;
-            Subtraction = $"{Ascending} - {Descending} = {Result}";
-        }
+        public int Ascending { get; set; }
+        public int Descending { get; set; }
+        public int Result { get; set; }
+        public string? Subtraction { get; set; }
     }
 }

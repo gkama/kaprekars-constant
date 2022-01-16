@@ -1,5 +1,4 @@
 using FluentValidation;
-
 using kaprekars.constant.data;
 using kaprekars.constant.services;
 
