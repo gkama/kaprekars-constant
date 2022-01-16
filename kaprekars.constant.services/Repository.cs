@@ -74,6 +74,9 @@ public class Repository : IRepository
         var res = desc > asc
             ? desc - asc
             : asc - desc;
+        var subtraction = desc > asc
+            ? $"{desc} - {asc}"
+            : $"{asc} - {desc}";
 
         return new Routine
         {
@@ -81,7 +84,7 @@ public class Repository : IRepository
             Ascending = asc,
             Descending = desc,
             Result = res,
-            Subtraction = $"{desc} - {asc} = {res}"
+            Subtraction = $"{subtraction} = {res}"
         };
     }
 }

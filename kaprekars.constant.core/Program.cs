@@ -14,11 +14,6 @@ services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-
-}
-
 app.MapHealthChecks("/health");
 app.MapControllers();
 
