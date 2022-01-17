@@ -12,7 +12,7 @@ public class RequestValidator : AbstractValidator<Request>
             .Length(4)
             .Must(x => int.TryParse(x, out _))
             .WithMessage("Must be a four-digit number")
-            .Must(x => int.Parse(x).HasAtleastTwoUniqueDigits())
+            .Must(x => x.HasAtleastTwoUniqueDigits())
             .WithMessage("Must have at least two unique digits");
     }
 }
