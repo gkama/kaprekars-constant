@@ -2,18 +2,18 @@
 {
     public static class Extensions
     {
-        public static int ToAscendingOrder(this int number)
+        public static string ToAscendingOrder(this string number)
         {
             return number.ToOrder();
         }
 
-        public static int ToDescendingOrder(this int number)
+        public static string ToDescendingOrder(this string number)
         {
             return number.ToOrder(descending: true);
         }
 
-        private static int ToOrder(
-            this int number,
+        private static string ToOrder(
+            this string number,
             bool descending = false)
         {
             var numberCharArray = number.ToString()
@@ -24,10 +24,10 @@
                 : numberCharArray.OrderByDescending(x => x);
             var orderedNumberStr = new string(orderedNumber.ToArray());
 
-            return int.Parse(orderedNumberStr);
+            return orderedNumberStr;
         }
 
-        public static bool HasAtleastTwoUniqueDigits(this int number)
+        public static bool HasAtleastTwoUniqueDigits(this string number)
         {
             return number.ToString()
                 .ToCharArray()

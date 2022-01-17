@@ -61,7 +61,6 @@ namespace kaprekars.constant.tests
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        [InlineData("0234")]
         [InlineData("12345")]
         [InlineData("123a")]
         [InlineData("1234ab")]
@@ -94,19 +93,19 @@ namespace kaprekars.constant.tests
         }
 
         [Theory]
-        [InlineData(1342, 1234, 4321)]
-        [InlineData(1954, 1459, 9541)]
-        [InlineData(8082, 0288, 8820)]
-        [InlineData(8352, 2358, 8532)]
-        [InlineData(0028, 0028, 0082)]
-        public void GetRoutine_IsSuccessful(int num, int asc, int desc)
+        [InlineData("1342", 1234, 4321)]
+        [InlineData("1954", 1459, 9541)]
+        [InlineData("8082", 0288, 8820)]
+        [InlineData("8352", 2358, 8532)]
+        [InlineData("0028", 0028, 8200)]
+        public void GetRoutine_IsSuccessful(string num, int asc, int desc)
         {
             // Arrange & Act
             var routine = _repo.GetRoutine(num);
 
             // Assert
             routine.Should().NotBeNull();
-            routine.Number.Should().Be(num);
+            routine.Number.Should().Be(int.Parse(num));
             routine.Ascending.Should().Be(asc);
             routine.Descending.Should().Be(desc);
             routine.Result.Should().Be(desc > asc ? desc - asc : asc - desc);
@@ -120,7 +119,7 @@ namespace kaprekars.constant.tests
     public sealed class RepositoryGetRoutine : Feature
     {
         private readonly IRepository _repo;
-        private int _num;
+        private string _num;
         private Routine _routine;
 
         public RepositoryGetRoutine()
@@ -128,11 +127,12 @@ namespace kaprekars.constant.tests
             _repo = new Repository(
                 Substitute.For<ILogger<Repository>>(),
                 new RequestValidator());
+            _num = string.Empty;
              _routine = new Routine();
         }
 
         [Given(@"I chose a four-digit number with two unique digits (\d+)")]
-        public void SetNum(int num)
+        public void SetNum(string num)
         {
             _num = num;
         }

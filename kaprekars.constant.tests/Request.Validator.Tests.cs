@@ -38,7 +38,6 @@ public class ReuqestValidatorTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    [InlineData("0234")]
     [InlineData("12345")]
     [InlineData("123a")]
     [InlineData("1234ab")]
