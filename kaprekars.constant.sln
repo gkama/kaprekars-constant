@@ -13,8 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kaprekars.constant.tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6CCC3A6D-164F-467B-AA9C-6E0B1CE75A65}"
 	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
 		LICENSE = LICENSE
 		README.md = README.md
+		sonar-project.properties = sonar-project.properties
 	EndProjectSection
 EndProject
 Global

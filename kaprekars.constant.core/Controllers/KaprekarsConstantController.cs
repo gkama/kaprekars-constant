@@ -1,7 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using kaprekars.constant.services;
 using kaprekars.constant.data;
+using BenchmarkDotNet.Running;
 
 namespace kaprekars.constant.core.Controllers;
 
@@ -32,15 +34,24 @@ public class KaprekarsConstantController : ControllerBase
     [Route("{number}/routines")]
     [ProducesResponseType(200)]
     [ProducesResponseType(400)]
-    public IActionResult GetRoutines([FromRoute] string number)
+    public IActionResult GetRoutines([FromRoute, Required] string number)
     {
         try
         {
-            return Ok(_repo.GetRoutines(new data.Request { Number = number }));
+            return Ok(_repo.GetRoutines(new Request { Number = number }));
         }
         catch (Exception ex)
         {
             return BadRequest(new { code = 400, message = ex.Message });
         }
+    }
+
+    [HttpGet]
+    [Route("benchmark")]
+    public IActionResult Benchmark()
+    {
+        var summary = BenchmarkRunner.Run<BenchmarkRepository>();
+
+        return Ok(summary);
     }
 }
