@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using kaprekars.constant.services;
 using kaprekars.constant.data;
-using BenchmarkDotNet.Running;
 
 namespace kaprekars.constant.core.Controllers;
 
@@ -44,14 +43,5 @@ public class KaprekarsConstantController : ControllerBase
         {
             return BadRequest(new { code = 400, message = ex.Message });
         }
-    }
-
-    [HttpGet]
-    [Route("benchmark")]
-    public IActionResult Benchmark()
-    {
-        var summary = BenchmarkRunner.Run<BenchmarkRepository>();
-
-        return Ok(summary);
     }
 }
