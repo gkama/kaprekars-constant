@@ -79,25 +79,11 @@ namespace kaprekars.constant.tests
         }
 
         [Theory]
-        [InlineData("1112")]
-        public void GetRoutines_WhenNumberWithNoKaprekarConstat_ShouldThrowApplicationException(string num)
-        {
-            // Arrange
-            var req = new Request { Number = num };
-
-            // Act
-            var builder = () => _ = _repo.GetRoutines(req);
-
-            // Assert
-            builder.Should().Throw<ApplicationException>();
-        }
-
-        [Theory]
         [InlineData("1342", "1234", "4321")]
         [InlineData("1954", "1459", "9541")]
-        [InlineData("8082", "0288", "8820")]
+        [InlineData("8082", "288", "8820")]
         [InlineData("8352", "2358", "8532")]
-        [InlineData("0028", "0028", "8200")]
+        [InlineData("0028", "28", "8200")]
         public void GetRoutine_IsSuccessful(string num, string asc, string desc)
         {
             // Arrange & Act
@@ -106,9 +92,9 @@ namespace kaprekars.constant.tests
             // Assert
             routine.Should().NotBeNull();
             routine.Number.Should().Be(num);
-            routine.Ascending.Should().Be(asc);
-            routine.Descending.Should().Be(desc);
-            routine.Result.Should().Be((int.Parse(desc) > int.Parse(asc) ? int.Parse(desc) - int.Parse(asc) : int.Parse(asc) - int.Parse(desc)).ToString());
+            routine.Ascending.Should().Be(int.Parse(asc).ToString());
+            routine.Descending.Should().Be(int.Parse(desc).ToString());
+            routine.Result.Should().Be(string.Format("{0:0000}", int.Parse(desc) > int.Parse(asc) ? int.Parse(desc) - int.Parse(asc) : int.Parse(asc) - int.Parse(desc)));
             routine.Subtraction.Should().Contain(asc.ToString());
             routine.Subtraction.Should().Contain(desc.ToString());
             routine.Subtraction.Should().Contain(routine.Result.ToString());
@@ -131,7 +117,7 @@ namespace kaprekars.constant.tests
              _routine = new Routine();
         }
 
-        [Given(@"I chose a four-digit number with two unique digits (\d+)")]
+        [Given(@"I chose a four-digit number with two unique digits ""(\w+?)""")]
         public void SetNum(string num)
         {
             _num = num;
@@ -143,19 +129,19 @@ namespace kaprekars.constant.tests
             _routine = _repo.GetRoutine(_num);
         }
 
-        [Then(@"the ascending number should be (\d+)")]
+        [Then(@"the ascending number should be ""(\w+?)""")]
         public void TheAscendingNumberShouldBe(string asc)
         {
             _routine.Ascending.Should().Be(asc);
         }
 
-        [And(@"the descending number should be (\d+)")]
+        [And(@"the descending number should be ""(\w+?)""")]
         public void TheDescendingNumberShouldBe(string desc)
         {
             _routine.Descending.Should().Be(desc);
         }
 
-        [And(@"the result number should be (\d+)")]
+        [And(@"the result number should be ""(\w+?)""")]
         public void TheResultNumberShouldBe(string res)
         {
             _routine.Result.Should().Be(res);
