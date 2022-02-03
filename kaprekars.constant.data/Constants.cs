@@ -2,5 +2,5 @@ namespace kaprekars.constant.data;
 
 public static class Constants
 {
-    public const int KaprekarsConstant = 6174;
+    public const string KaprekarsConstant = "6174";
 }

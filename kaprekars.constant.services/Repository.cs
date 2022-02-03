@@ -79,10 +79,10 @@ public class Repository : IRepository
 
         return new Routine
         {
-            Number = int.Parse(num),
-            Ascending = asc,
-            Descending = desc,
-            Result = res,
+            Number = num,
+            Ascending = asc.ToString(),
+            Descending = desc.ToString(),
+            Result = string.Format("{0:0000}", res),
             Subtraction = $"{subtraction} = {res}"
         };
     }
