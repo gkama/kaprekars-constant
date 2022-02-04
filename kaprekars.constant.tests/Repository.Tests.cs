@@ -97,7 +97,7 @@ namespace kaprekars.constant.tests
             routine.Result.Should().Be(string.Format("{0:0000}", int.Parse(desc) > int.Parse(asc) ? int.Parse(desc) - int.Parse(asc) : int.Parse(asc) - int.Parse(desc)));
             routine.Subtraction.Should().Contain(asc.ToString());
             routine.Subtraction.Should().Contain(desc.ToString());
-            routine.Subtraction.Should().Contain(routine.Result.ToString());
+            routine.Subtraction.Should().Contain(routine?.Result?.ToString());
         }
     }
 
